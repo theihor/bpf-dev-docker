@@ -1,4 +1,4 @@
-A container to build [Linux bpf-next tree](https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git) and be able run `tools/testing/selftests/bpf/vmtest.sh`.
+A container to build [Linux bpf-next tree](https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git) and be able to run `tools/testing/selftests/bpf/vmtest.sh`.
 
 `./build-docker.sh` will build a docker image based on Debian
 (bullseye) with [qemu](https://www.qemu.org/),
