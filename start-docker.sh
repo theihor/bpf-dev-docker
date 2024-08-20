@@ -1,6 +1,17 @@
 #!/bin/bash
 
-tag=${1:-bpfdev}
+repo_dir=${1:-linux}
+tag=${2:-bpfdev}
+
+if [ ! -d "$repo_dir" ]; then
+    echo "Directory $repo_dir does not exist."
+    read -p "Would you like to clone bpf-next into ${repo_dir} ? (y/n): " confirm
+    if [[ $confirm =~ ^[Yy]$ ]]; then
+        git clone --depth 1 \
+            https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git \
+            $repo_dir
+    fi
+fi
 
 mkdir -p ${HOME}/.bpf_selftests
 
@@ -10,7 +21,7 @@ function docker_run {
            --cap-add ALL \
            --user "$(id -u):$(id -g)" \
            -v ${HOME}/.bpf_selftests:${HOME}/.bpf_selftests \
-           -v $(pwd):/opt \
+           -v $(realpath $repo_dir):/opt/linux \
            $tag
 }
 
